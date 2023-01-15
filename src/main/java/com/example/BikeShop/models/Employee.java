@@ -9,6 +9,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
+//Сотрудник
+@Entity
 public class Employee {
 
     @Id
@@ -30,10 +32,10 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     private Date dateBirth;
 
-    @Pattern(regexp = "[0-9]{4}", message = "Некорректный ввод номера паспорта")
+    @Pattern(regexp = "[0-9]{4}", message = "Серия паспорта должна состоять только из цифр и иметь данный формат: 9999")
     private String passportSeries;
 
-    @Pattern(regexp = "[0-9]{6}", message = "Некорректный ввод серии паспорта")
+    @Pattern(regexp = "[0-9]{6}", message = "Номер паспорта должна состоять только из цифр и иметь данный формат: 999999")
     private String passportNumber;
 
     @NotBlank(message = "Адрес не должен быть пустым или состоять из одних лишь пробелов")
@@ -42,5 +44,103 @@ public class Employee {
     @Pattern(regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7}$", message = "Номера телефона должен состоять из 11 цифр и иметь данный формат: +7(999)9999999 или 8(999)9999999")
     private String phoneNumber;
 
+    @OneToOne
+    @JoinColumn(name = "userId", referencedColumnName = "idUser")
+    private User user;
 
+    public Employee() {
+    }
+
+    public Employee(String name, String surname, String patronymic, Date dateBirth, String passportSeries,
+                    String passportNumber, String address, String phoneNumber, User user) {
+        this.name = name;
+        this.surname = surname;
+        this.patronymic = patronymic;
+        this.dateBirth = dateBirth;
+        this.passportSeries = passportSeries;
+        this.passportNumber = passportNumber;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.user = user;
+    }
+
+    public Long getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(Long idEmployee) {
+        this.idEmployee = idEmployee;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public Date getDateBirth() {
+        return dateBirth;
+    }
+
+    public void setDateBirth(Date dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public String getPassportSeries() {
+        return passportSeries;
+    }
+
+    public void setPassportSeries(String passportSeries) {
+        this.passportSeries = passportSeries;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

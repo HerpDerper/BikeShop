@@ -6,30 +6,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
 
-//Цвет
+//Статус
 @Entity
-public class Color {
+public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idColor;
+    private Long idStatus;
 
-    @Pattern(regexp = "[а-яА-Я]{1,50}", message = "Наименование цвета должно быть от 1 до 50 символов и состоять только из букв")
+    @Pattern(regexp = "[а-яА-Я]{1,50}", message = "Наименование статуса должно быть от 1 до 50 символов и состоять только из букв")
     private String name;
 
-    public Color() {
+    public Status() {
     }
 
-    public Color(String name) {
+    public Status(String name) {
         this.name = name;
     }
 
-    public Long getIdColor() {
-        return idColor;
+    public Long getIdStatus() {
+        return idStatus;
     }
 
-    public void setIdColor(Long idColor) {
-        this.idColor = idColor;
+    public void setIdStatus(Long idStatus) {
+        this.idStatus = idStatus;
     }
 
     public String getName() {

@@ -3,6 +3,8 @@ package com.example.BikeShop.models;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
+//Клиент
+@Entity
 public class Client {
 
     @Id

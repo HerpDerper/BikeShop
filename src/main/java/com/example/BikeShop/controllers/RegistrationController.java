@@ -2,6 +2,7 @@ package com.example.BikeShop.controllers;
 
 import com.example.BikeShop.models.Role;
 import com.example.BikeShop.models.User;
+import com.example.BikeShop.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,7 @@ public class RegistrationController {
             return "user/Create";
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
-        user.setRoles(Collections.singleton(Role.ADMIN));
+        user.setRoles(Collections.singleton(Role.CLIENT));
         userRepository.save(user);
         return "redirect:/login";
     }

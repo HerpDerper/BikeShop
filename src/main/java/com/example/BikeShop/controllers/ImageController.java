@@ -1,7 +1,7 @@
 package com.example.BikeShop.controllers;
 
-import operator.models.Image;
-import operator.repositories.ImageRepository;
+import com.example.BikeShop.models.Image;
+import com.example.BikeShop.repositories.ImageRepository;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
