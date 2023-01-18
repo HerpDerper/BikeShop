@@ -1,7 +1,7 @@
 package com.example.BikeShop.controllers;
 
-import operator.configurations.DatabaseConfig;
-import operator.services.ConsoleService;
+import com.example.BikeShop.configurations.DatabaseConfig;
+import com.example.BikeShop.services.ConsoleService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;

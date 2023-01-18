@@ -1,6 +1,6 @@
 package com.example.BikeShop.controllers;
 
-import operator.services.RoleService;
+import com.example.BikeShop.services.RoleService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,5 +16,4 @@ public class RoleController {
         else if (new RoleService().sellerAccess(auth)) return "redirect:/clientNumber/create";
         else return "redirect:/clientPage/tariffIndex";
     }
-
 }

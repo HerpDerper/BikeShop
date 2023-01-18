@@ -36,6 +36,10 @@ public class Product {
     @NotNull(message = "Срок гарантии не должен быть пустым")
     private int warrantyPeriod;
 
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "imageId")
+    private Image image;
+
     @NotNull(message = "Выберите категорию товара")
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "idCategory")
@@ -61,13 +65,15 @@ public class Product {
 
 
     public Product(String name, int price, Date dateReceipt,
-                   int count, int warrantyPeriod, Category category,
-                   Color color, Storage storage, Supplier supplier) {
+                   int count, int warrantyPeriod, Image image,
+                   Category category, Color color, Storage storage,
+                   Supplier supplier) {
         this.name = name;
         this.price = price;
         this.dateReceipt = dateReceipt;
         this.count = count;
         this.warrantyPeriod = warrantyPeriod;
+        this.image = image;
         this.category = category;
         this.color = color;
         this.storage = storage;
@@ -120,6 +126,14 @@ public class Product {
 
     public void setWarrantyPeriod(int warrantyPeriod) {
         this.warrantyPeriod = warrantyPeriod;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public Category getCategory() {
