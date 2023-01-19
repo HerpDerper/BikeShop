@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 @PreAuthorize("hasAnyAuthority('ADMIN')")
+@RequestMapping("/database")
 @Controller
 public class DatabaseController {
 
@@ -35,13 +37,13 @@ public class DatabaseController {
         this.resourceLoader = resourceLoader;
     }
 
-    @GetMapping("/database/index")
+    @GetMapping("index")
     public String databaseIndex(Model model) {
         model.addAttribute("files", getBackupsList());
         return "database/Index";
     }
 
-    @GetMapping("/database/downloadScript")
+    @GetMapping("downloadScript")
     public ResponseEntity<Resource> databaseDownloadScript(@RequestParam(value = "withData", required = false) Boolean withData) {
         DatabaseConfig.init();
         String command = String.format("mysqldump --no-tablespaces --column-statistics=0 -u%s -p%s -h%s %s > %s",
@@ -64,7 +66,7 @@ public class DatabaseController {
         }
     }
 
-    @GetMapping("/database/createBackup")
+    @GetMapping("createBackup")
     public String databaseCreateBackup() {
         DatabaseConfig.init();
         try {
@@ -80,13 +82,13 @@ public class DatabaseController {
         return "redirect:/database/index";
     }
 
-    @PostMapping("/database/deleteBackup")
+    @PostMapping("deleteBackup")
     public String databaseDeleteBackup(@RequestParam("fileName") String fileName) throws IOException {
         Files.deleteIfExists(new File(Paths.get("backups/" + fileName).toUri()).toPath());
         return "redirect:/database/index";
     }
 
-    @PostMapping("/database/uploadBackup")
+    @PostMapping("uploadBackup")
     public String databaseUploadBackup(@RequestParam("file") MultipartFile file) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(new File(Paths.get("backups/" + "customBackup.sql").toUri()));
         fileOutputStream.write(file.getBytes());
@@ -95,7 +97,7 @@ public class DatabaseController {
         return "redirect:/database/index";
     }
 
-    @PostMapping("database/restoreBackup")
+    @PostMapping("restoreBackup")
     public String databaseRestoreBackup(@RequestParam("fileName") String fileName) {
         restoreData(fileName, "backups");
         return "redirect:/database/index";
@@ -125,5 +127,4 @@ public class DatabaseController {
         Collections.reverse(backups);
         return backups;
     }
-
 }
