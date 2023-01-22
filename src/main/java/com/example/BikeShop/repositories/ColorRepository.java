@@ -1,8 +1,8 @@
 package com.example.BikeShop.repositories;
 
 import com.example.BikeShop.models.Color;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ColorRepository extends CrudRepository<Color, Long> {
+public interface ColorRepository extends JpaRepository<Color, Long> {
 
 }

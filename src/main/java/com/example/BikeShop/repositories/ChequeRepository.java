@@ -1,8 +1,8 @@
 package com.example.BikeShop.repositories;
 
 import com.example.BikeShop.models.Cheque;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChequeRepository extends CrudRepository<Cheque, Long> {
+public interface ChequeRepository extends JpaRepository<Cheque, Long> {
 
 }

@@ -64,10 +64,8 @@ public class Product {
     }
 
 
-    public Product(String name, int price, Date dateReceipt,
-                   int count, int warrantyPeriod, Image image,
-                   Category category, Color color, Storage storage,
-                   Supplier supplier) {
+    public Product(String name, int price, Date dateReceipt, int count, int warrantyPeriod, Image image,
+                   Category category, Color color, Storage storage, Supplier supplier) {
         this.name = name;
         this.price = price;
         this.dateReceipt = dateReceipt;

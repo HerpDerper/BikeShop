@@ -27,8 +27,7 @@ public class RegistrationController {
 
     private final ClientRepository clientRepository;
 
-    public RegistrationController(UserRepository userRepository,
-                                  ClientRepository clientRepository,
+    public RegistrationController(UserRepository userRepository, ClientRepository clientRepository,
                                   PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
