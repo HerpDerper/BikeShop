@@ -17,7 +17,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @PreAuthorize("hasAnyAuthority('HR_DEP') or hasAnyAuthority('DIRCTOR')")
 @RequestMapping("/employee")
@@ -130,8 +132,7 @@ public class EmployeeController {
         if (employee.getDateBirth() != null) {
             long milliseconds = new Date().getTime() - employee.getDateBirth().getTime();
             int ages = (int) (milliseconds / (24 * 60 * 60 * 1000 * 365.25));
-            if (userRepository.findUserByUsername(user.getUsername()) != null &&
-                    !userRepository.findUserByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
+            if (!userRepository.findUserByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
                 bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
                 model.addAttribute("errorMessageUsername", "Данный логин уже занят");
             }

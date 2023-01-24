@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-//Категория товара
+//Категория
 @Entity
 public class Category {
 
@@ -22,8 +22,7 @@ public class Category {
     public Category() {
     }
 
-    public Category(Long idCategory, String name) {
-        this.idCategory = idCategory;
+    public Category(String name) {
         this.name = name;
     }
 

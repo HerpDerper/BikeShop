@@ -40,22 +40,18 @@ public class Product {
     @JoinColumn(name = "imageId")
     private Image image;
 
-    @NotNull(message = "Выберите категорию товара")
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "idCategory")
     private Category category;
 
-    @NotNull(message = "Выберите цвет товара")
     @ManyToOne
     @JoinColumn(name = "colorId", referencedColumnName = "idColor")
     private Color color;
 
-    @NotNull(message = "Выберите склад для товара")
     @ManyToOne
     @JoinColumn(name = "storageId", referencedColumnName = "idStorage")
     private Storage storage;
 
-    @NotNull(message = "Выберите поставщика для товара")
     @ManyToOne
     @JoinColumn(name = "supplierId", referencedColumnName = "idSupplier")
     private Supplier supplier;

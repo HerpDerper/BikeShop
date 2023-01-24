@@ -110,8 +110,7 @@ public class ClientController {
     public String clientEdit(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
                              @ModelAttribute("client") @Valid Client client, BindingResult bindingResultClient,
                              Model model) {
-        if (userRepository.findUserByUsername(user.getUsername()) != null &&
-                !userRepository.findUserByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
+        if (!userRepository.findUserByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
             bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
             model.addAttribute("errorMessageUsername", "Данный логин уже занят");
         }
