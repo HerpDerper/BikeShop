@@ -1,9 +1,16 @@
 package com.example.BikeShop.repositories;
 
 import com.example.BikeShop.models.Employee;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmployeeRepository extends JpaRepository<Employee,Long> {
+import javax.validation.constraints.NotBlank;
 
-    Iterable<Employee> findByUserUsernameContains (String username);
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+    Iterable<Employee> findByUserUsernameContainsAndUserUsernameNot(String username, String usernameNot);
+
+    Iterable<Employee> findByUserUsernameNot(String username);
+
+    Iterable<Employee> findAllByUserUsernameNot(String username, Sort sort);
 }
