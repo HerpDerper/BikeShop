@@ -11,10 +11,10 @@ public enum Role implements GrantedAuthority {
     DIRECTOR("Директор"), // Суперпользователь
     MERCHANDISER("Товаровед"),
     REPAIR_DEP("Сотрудник отдела ремонта"),
-    CUSTOMER_SERVICE_DEP("Сотрудник отдела по работе с клиентами"),
+    CLIENT_SERVICE_DEP("Сотрудник отдела по работе с клиентами"),
     CLIENT("Клиент");
 
-    private String name;
+    private final String name;
 
     Role(String name) {
         this.name = name;

@@ -44,8 +44,8 @@ public class EmployeeController {
         return "employee/Index";
     }
 
-    @GetMapping("filter")
-    public String employeeFilter(@RequestParam(required = false) String username, Model model) {
+    @GetMapping("search")
+    public String employeeSearch(@RequestParam(required = false) String username, Model model) {
         Iterable<Employee> employees;
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (username != null && !username.equals(""))
@@ -75,11 +75,26 @@ public class EmployeeController {
         return "employee/Create";
     }
 
+    @GetMapping("edit")
+    public String employeeEdit(@RequestParam Employee employee, Model model) {
+        User user = employee.getUser();
+        model.addAttribute("roles", getEmployeeRoles());
+        model.addAttribute("employee", employee);
+        model.addAttribute("user", user);
+        return "employee/Edit";
+    }
+
+    @GetMapping("details")
+    public String employeeDetails(@RequestParam Employee employee, Model model) {
+        model.addAttribute("employee", employee);
+        model.addAttribute("role", employee.getUser().getRoles());
+        return "employee/Details";
+    }
+
     @PostMapping("create")
     public String employeeCreate(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
                                  @ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResultEmployee,
-                                 @RequestParam String passwordSubmit, @RequestParam Role role,
-                                 Model model) {
+                                 @RequestParam String passwordSubmit, Model model) {
         if (employee.getDateBirth() != null) {
             long milliseconds = new Date().getTime() - employee.getDateBirth().getTime();
             int ages = (int) (milliseconds / (24 * 60 * 60 * 1000 * 365.25));
@@ -102,34 +117,16 @@ public class EmployeeController {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
-        user.setRoles(Collections.singleton(role));
         userRepository.save(user);
         employee.setUser(user);
         employeeRepository.save(employee);
         return "redirect:/employee/index";
     }
 
-    @PostMapping("changeStatus")
-    public String employeeChangeStatus(@RequestParam Employee employee) {
-        User user = employee.getUser();
-        user.setActive(!user.isActive());
-        userRepository.save(user);
-        return "redirect:/employee/index";
-    }
-
-    @GetMapping("edit")
-    public String employeeEdit(@RequestParam Employee employee, Model model) {
-        User user = employee.getUser();
-        model.addAttribute("roles", getEmployeeRoles());
-        model.addAttribute("employee", employee);
-        model.addAttribute("user", user);
-        return "employee/Edit";
-    }
-
     @PostMapping("edit")
     public String employeeEdit(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
                                @ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResultEmployee,
-                                Model model) {
+                               Model model) {
         if (employee.getDateBirth() != null) {
             long milliseconds = new Date().getTime() - employee.getDateBirth().getTime();
             int ages = (int) (milliseconds / (24 * 60 * 60 * 1000 * 365.25));
@@ -153,11 +150,12 @@ public class EmployeeController {
         return "redirect:/employee/index";
     }
 
-    @GetMapping("details")
-    public String employeeDetails(@RequestParam Employee employee, Model model) {
-        model.addAttribute("employee", employee);
-        model.addAttribute("role", employee.getUser().getRoles());
-        return "employee/Details";
+    @PostMapping("changeStatus")
+    public String employeeChangeStatus(@RequestParam Employee employee) {
+        User user = employee.getUser();
+        user.setActive(!user.isActive());
+        userRepository.save(user);
+        return "redirect:/employee/index";
     }
 
     private List<Role> getEmployeeRoles() {

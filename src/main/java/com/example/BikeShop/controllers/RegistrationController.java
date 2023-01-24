@@ -34,6 +34,11 @@ public class RegistrationController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/registration")
+    public String registration(@ModelAttribute("user") User user, @ModelAttribute("client") Client client) {
+        return "user/Create";
+    }
+
     @PostMapping("/registration")
     public String registration(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
                                @ModelAttribute("client") @Valid Client client, BindingResult bindingResultClient,
@@ -48,7 +53,7 @@ public class RegistrationController {
             model.addAttribute("errorMessagePassword", "Пароли не совпадают");
         }
         if (bindingResultUser.hasErrors() || bindingResultClient.hasErrors())
-            return "client/Create";
+            return "user/Create";
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.CLIENT));
@@ -56,10 +61,5 @@ public class RegistrationController {
         client.setUser(user);
         clientRepository.save(client);
         return "redirect:/login";
-    }
-
-    @GetMapping("/registration")
-    public String registration(@ModelAttribute("user") User user, @ModelAttribute("client") Client client) {
-        return "client/Create";
     }
 }

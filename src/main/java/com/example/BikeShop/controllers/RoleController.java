@@ -15,9 +15,9 @@ public class RoleController {
             case "HR_DEP" -> "redirect:/employee/index";
             case "SALES_DEP" -> "redirect:/database/index";
             case "DIRECTOR" -> "redirect:/database/index";
-            case "MERCHANDISER" -> "redirect:/database/index";
+            case "MERCHANDISER" -> "redirect:/product/index";
             case "REPAIR_DEP" -> "redirect:/database/index";
-            case "CUSTOMER_SERVICE_DEP" -> "redirect:/database/index";
+            case "CLIENT_SERVICE_DEP" -> "redirect:/client/index";
             default -> "redirect:/database/index";
         };
     }
