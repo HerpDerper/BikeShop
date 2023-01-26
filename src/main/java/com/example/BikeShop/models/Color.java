@@ -14,7 +14,6 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idColor;
 
-    @Pattern(regexp = "[а-яА-Я]{1,50}", message = "Наименование цвета должно быть от 1 до 50 символов и состоять только из букв")
     private String name;
 
     public Color() {

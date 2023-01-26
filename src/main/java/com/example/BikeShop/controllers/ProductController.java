@@ -7,9 +7,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
+import java.io.IOException;
 
 @PreAuthorize("hasAnyAuthority('MERCHANDISER') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/product")
@@ -17,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProductController {
 
     private final ProductRepository productRepository;
-
-    private final ImageRepository imageRepository;
 
     private final CategoryRepository categoryRepository;
 
@@ -30,12 +31,10 @@ public class ProductController {
 
     private final ProductImageService productImageService;
 
-    public ProductController(ProductRepository productRepository, ImageRepository imageRepository,
-                             CategoryRepository categoryRepository, ColorRepository colorRepository,
-                             StorageRepository storageRepository, SupplierRepository supplierRepository,
-                             ProductImageService productImageService) {
+    public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository,
+                             ColorRepository colorRepository, StorageRepository storageRepository,
+                             SupplierRepository supplierRepository, ProductImageService productImageService) {
         this.productRepository = productRepository;
-        this.imageRepository = imageRepository;
         this.categoryRepository = categoryRepository;
         this.colorRepository = colorRepository;
         this.storageRepository = storageRepository;
@@ -71,4 +70,43 @@ public class ProductController {
         return "product/Index";
     }
 
+    @GetMapping("create")
+    public String productCreate(@ModelAttribute("product") Product product, Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("colors", colorRepository.findAll());
+        model.addAttribute("storages", storageRepository.findAll());
+        model.addAttribute("suppliers", supplierRepository.findAll());
+        return "product/Create";
+    }
+
+    @GetMapping("edit")
+    public String productEdit(@RequestParam Product product, Model model) {
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("colors", colorRepository.findAll());
+        model.addAttribute("storages", storageRepository.findAll());
+        model.addAttribute("suppliers", supplierRepository.findAll());
+        return "product/Edit";
+    }
+
+    @GetMapping("details")
+    public String productDetails(@RequestParam Product product, Model model) {
+        model.addAttribute("product", product);
+        return "product/Details";
+    }
+
+    @PostMapping("create")
+    public String productCreate(@RequestParam("file") MultipartFile file,
+                                @ModelAttribute("product") @Valid Product product, BindingResult bindingResultProduct,
+                                Model model) throws IOException {
+        if (bindingResultProduct.hasErrors()) {
+            model.addAttribute("categories", categoryRepository.findAll());
+            model.addAttribute("colors", colorRepository.findAll());
+            model.addAttribute("storages", storageRepository.findAll());
+            model.addAttribute("suppliers", supplierRepository.findAll());
+            return "product/Create";
+        }
+        productImageService.saveProductAndImage(product, file);
+        return "redirect:/product/index";
+    }
 }

@@ -22,8 +22,8 @@ public class Product {
     @NotNull(message = "Цена товара не должна быть пустой")
     private int price;
 
-    @NotNull(message = "Дата поступления на склад не должна быть пустой")
-    @Past(message = "Дата поступления на склад не может быть будущей")
+    @NotNull(message = "Дата поступления не должна быть пустой")
+    @Past(message = "Дата поступления не может быть будущей")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateReceipt;
