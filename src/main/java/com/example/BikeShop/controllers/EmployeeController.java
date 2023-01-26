@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@PreAuthorize("hasAnyAuthority('HR_DEP') or hasAnyAuthority('DIRCTOR')")
+@PreAuthorize("hasAnyAuthority('HR_DEP') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/employee")
 @Controller
 public class EmployeeController {
@@ -100,7 +100,7 @@ public class EmployeeController {
         if (employee.getDateBirth() != null) {
             long milliseconds = new Date().getTime() - employee.getDateBirth().getTime();
             int ages = (int) (milliseconds / (24 * 60 * 60 * 1000 * 365.25));
-            if (userRepository.findUserByUsername(user.getUsername()) != null) {
+            if (userRepository.findByUsername(user.getUsername()) != null) {
                 bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
                 model.addAttribute("errorMessageUsername", "Данный логин уже занят");
             }
@@ -132,7 +132,10 @@ public class EmployeeController {
         if (employee.getDateBirth() != null) {
             long milliseconds = new Date().getTime() - employee.getDateBirth().getTime();
             int ages = (int) (milliseconds / (24 * 60 * 60 * 1000 * 365.25));
-            if (!userRepository.findUserByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
+            if (userRepository.findByUsername(user.getUsername()) != null &&
+                    !userRepository.findByUsername(user.getUsername())
+                            .getIdUser()
+                            .equals(user.getIdUser())) {
                 bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
                 model.addAttribute("errorMessageUsername", "Данный логин уже занят");
             }

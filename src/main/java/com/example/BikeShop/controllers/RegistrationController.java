@@ -44,7 +44,7 @@ public class RegistrationController {
                                @ModelAttribute("client") @Valid Client client, BindingResult bindingResultClient,
                                @RequestParam String passwordSubmit,
                                Model model) {
-        if (userRepository.findUserByUsername(user.getUsername()) != null) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
             model.addAttribute("errorMessageUsername", "Данный логин уже занят");
         }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@PreAuthorize("hasAnyAuthority('MERCHANDISER') or hasAnyAuthority('DIRCTOR')")
+@PreAuthorize("hasAnyAuthority('MERCHANDISER') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/category")
 @Controller
 public class CategoryController {
@@ -66,7 +66,7 @@ public class CategoryController {
     public String categoryCreate(@ModelAttribute("category") @Valid Category category, BindingResult bindingResultCategory,
                                  Model model) {
         if (categoryRepository.findByName(category.getName()) != null) {
-            bindingResultCategory.addError(new ObjectError("name", "Данный логин уже занят"));
+            bindingResultCategory.addError(new ObjectError("name", "Данная категория уже существует"));
             model.addAttribute("errorMessageName", "Данная категория уже существует");
         }
         if (bindingResultCategory.hasErrors())
@@ -78,8 +78,11 @@ public class CategoryController {
     @PostMapping("edit")
     public String categoryEdit(@ModelAttribute("category") @Valid Category category, BindingResult bindingResultCategory,
                                Model model) {
-        if (!categoryRepository.findByName(category.getName()).getIdCategory().equals(category.getIdCategory())) {
-            bindingResultCategory.addError(new ObjectError("name", "Данный логин уже занят"));
+        if (categoryRepository.findByName(category.getName()) != null &&
+                !categoryRepository.findByName(category.getName())
+                        .getIdCategory()
+                        .equals(category.getIdCategory())) {
+            bindingResultCategory.addError(new ObjectError("name", "Данная категория уже существует"));
             model.addAttribute("errorMessageName", "Данная категория уже существует");
         }
         if (bindingResultCategory.hasErrors())

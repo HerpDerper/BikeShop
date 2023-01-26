@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Collections;
 
-@PreAuthorize("hasAnyAuthority('CLIENT_SERVICE_DEP') or hasAnyAuthority('DIRCTOR')")
+@PreAuthorize("hasAnyAuthority('CLIENT_SERVICE_DEP') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/client")
 @Controller
 public class ClientController {
@@ -87,7 +87,7 @@ public class ClientController {
                                @ModelAttribute("client") @Valid Client client, BindingResult bindingResultClient,
                                @RequestParam String passwordSubmit,
                                Model model) {
-        if (userRepository.findUserByUsername(user.getUsername()) != null) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
             bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
             model.addAttribute("errorMessageUsername", "Данный логин уже занят");
         }
@@ -110,7 +110,10 @@ public class ClientController {
     public String clientEdit(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
                              @ModelAttribute("client") @Valid Client client, BindingResult bindingResultClient,
                              Model model) {
-        if (!userRepository.findUserByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
+        if (userRepository.findByUsername(user.getUsername()) != null &&
+                !userRepository.findByUsername(user.getUsername())
+                        .getIdUser()
+                        .equals(user.getIdUser())) {
             bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
             model.addAttribute("errorMessageUsername", "Данный логин уже занят");
         }
