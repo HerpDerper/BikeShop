@@ -25,8 +25,6 @@ public class Image {
 
     private String contentType;
 
-    private boolean isPreviewImage;
-
     @Lob
     private byte[] bytes;
 

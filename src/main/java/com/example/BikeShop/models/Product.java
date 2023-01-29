@@ -28,13 +28,15 @@ public class Product {
     @Temporal(TemporalType.DATE)
     private Date dateReceipt;
 
-    @Min(value = 0, message = "Количество товара должно быть больше или равно 0")
+    @Min(value = 1, message = "Количество товара должно быть больше или равно 1")
     @NotNull(message = "Количество товара не должно быть пустым")
     private int count;
 
     @Min(value = 0, message = "Срок гарантии должен быть больше или равно 0")
     @NotNull(message = "Срок гарантии не должен быть пустым")
     private int warrantyPeriod;
+
+    private boolean active;
 
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "imageId")
@@ -60,13 +62,14 @@ public class Product {
     }
 
 
-    public Product(String name, int price, Date dateReceipt, int count, int warrantyPeriod, Image image,
-                   Category category, Color color, Storage storage, Supplier supplier) {
+    public Product(String name, int price, Date dateReceipt, int count, int warrantyPeriod, boolean active,
+                   Image image, Category category, Color color, Storage storage, Supplier supplier) {
         this.name = name;
         this.price = price;
         this.dateReceipt = dateReceipt;
         this.count = count;
         this.warrantyPeriod = warrantyPeriod;
+        this.active = active;
         this.image = image;
         this.category = category;
         this.color = color;
@@ -120,6 +123,14 @@ public class Product {
 
     public void setWarrantyPeriod(int warrantyPeriod) {
         this.warrantyPeriod = warrantyPeriod;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public Image getImage() {

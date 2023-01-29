@@ -21,26 +21,21 @@ public class ProductImageService {
     private final ImageRepository imageRepository;
 
     public void saveProductAndImage(Product product, MultipartFile file) throws IOException {
-        Image image = imageRepository.findImageByProduct(product);
-        if (file != null)
-            image = saveImageEntity(file, product);
-        product.setImage(image);
-        imageRepository.save(image);
+        if (file != null && !file.isEmpty()) {
+            Image image = saveImageEntity(file);
+            imageRepository.save(image);
+            product.setImage(image);
+        }
         productRepository.save(product);
     }
 
-    private Image saveImageEntity(MultipartFile file, Product product) throws IOException {
-        Image image;
-        if (product.getImage() != null)
-            image = product.getImage();
-        else
-            image = new Image();
+    private Image saveImageEntity(MultipartFile file) throws IOException {
+        Image image = new Image();
         image.setName(file.getName());
         image.setOriginalFileName(file.getOriginalFilename());
         image.setContentType(file.getContentType());
         image.setSize(file.getSize());
         image.setBytes(file.getBytes());
-        image.setPreviewImage(true);
         return image;
     }
 }

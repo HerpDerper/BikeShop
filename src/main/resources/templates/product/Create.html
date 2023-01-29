@@ -29,15 +29,17 @@
             <input placeholder="Количество" type="text" class="form-control" th:field="*{count}" data-mask="count">
             <div class="error text-danger" th:if="${#fields.hasErrors('count')}" th:errors="*{count}"></div>
         </div>
-        <div class="form-group mt-2">
+        <div class="input-group mt-2">
             <input placeholder="Срок гарантии" type="text" class="form-control" th:field="*{warrantyPeriod}"
                    data-mask="warrantyPeriod">
+            <span class="input-group-text" id="basic-addon2">месяцев</span>
             <div class="error text-danger" th:if="${#fields.hasErrors('warrantyPeriod')}"
                  th:errors="*{warrantyPeriod}"></div>
         </div>
         <div class="form-group mt-2">
             <input placeholder="Изображение" type="file" class="form-control" name="file"
                    accept="image/png, image/jpg, image/jpeg">
+            <div class="error text-danger" th:if="errorMessageImage!=null" th:text="${errorMessageImage}"></div>
         </div>
         <div class="input-group mt-2">
             <select th:field="*{category}" class="form-control">
@@ -94,8 +96,6 @@
         })
         mask('warrantyPeriod', {
             mask: '00',
-            min: 1,
-            max: 12
         })
     })
 </script>
