@@ -15,7 +15,7 @@ public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idCBooking;
+    private Long idBooking;
 
     @NotNull(message = "Дата начала работ не должна быть пустой")
     @PastOrPresent(message = "Дата начала работ не может быть будущей")
@@ -23,7 +23,6 @@ public class Booking {
     @Temporal(TemporalType.DATE)
     private Date dateBegin;
 
-    @FutureOrPresent(message = "Дата конца работ не может быть прошедшей")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateEnd;
@@ -60,12 +59,12 @@ public class Booking {
         this.employee = employee;
     }
 
-    public Long getIdCBooking() {
-        return idCBooking;
+    public Long getIdBooking() {
+        return idBooking;
     }
 
-    public void setIdCBooking(Long idCBooking) {
-        this.idCBooking = idCBooking;
+    public void setIdBooking(Long idBooking) {
+        this.idBooking = idBooking;
     }
 
     public Date getDateBegin() {

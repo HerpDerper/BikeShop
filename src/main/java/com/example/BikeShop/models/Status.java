@@ -14,7 +14,6 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idStatus;
 
-    @Pattern(regexp = "[а-яА-Я]{1,50}", message = "Наименование статуса должно быть от 1 до 50 символов и состоять только из букв")
     private String name;
 
     public Status() {

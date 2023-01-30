@@ -13,4 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Iterable<Employee> findByUserUsernameNot(String username);
 
     Iterable<Employee> findAllByUserUsernameNot(String username, Sort sort);
+
+    Employee findByUserUsername(String username);
 }
