@@ -1,6 +1,7 @@
 package com.example.BikeShop.controllers;
 
 import com.example.BikeShop.models.Booking;
+import com.example.BikeShop.models.Malfunction;
 import com.example.BikeShop.models.Status;
 import com.example.BikeShop.repositories.*;
 import org.springframework.data.domain.Sort;
@@ -14,8 +15,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@PreAuthorize("hasAnyAuthority('SALES_DEP') or hasAnyAuthority('DIRECTOR')")
+@PreAuthorize("hasAnyAuthority('REPAIR_DEP') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/booking")
 @Controller
 public class BookingController {
@@ -30,14 +32,17 @@ public class BookingController {
 
     private final EmployeeRepository employeeRepository;
 
+    private final MalfunctionRepository malfunctionRepository;
+
     public BookingController(BookingRepository bookingRepository, ProductRepository productRepository,
                              StatusRepository statusRepository, ClientRepository clientRepository,
-                             EmployeeRepository employeeRepository) {
+                             EmployeeRepository employeeRepository, MalfunctionRepository malfunctionRepository) {
         this.bookingRepository = bookingRepository;
         this.productRepository = productRepository;
         this.statusRepository = statusRepository;
         this.clientRepository = clientRepository;
         this.employeeRepository = employeeRepository;
+        this.malfunctionRepository = malfunctionRepository;
     }
 
 
@@ -45,6 +50,7 @@ public class BookingController {
     public String bookingIndex(Model model) {
         model.addAttribute("bookings", bookingRepository.findAll());
         model.addAttribute("statuses", statusRepository.findAll());
+        model.addAttribute("malfunctions", malfunctionRepository.findAll());
         return "booking/Index";
     }
 
@@ -56,6 +62,7 @@ public class BookingController {
         else
             bookings = bookingRepository.findAll();
         model.addAttribute("bookings", bookings);
+        model.addAttribute("statuses", statusRepository.findAll());
         return "booking/Index";
     }
 
@@ -67,6 +74,8 @@ public class BookingController {
         else
             bookings = bookingRepository.findAll(Sort.by(sortProperty).descending());
         model.addAttribute("bookings", bookings);
+        model.addAttribute("statuses", statusRepository.findAll());
+        model.addAttribute("malfunctions", malfunctionRepository.findAll());
         return "booking/Index";
     }
 
@@ -83,6 +92,7 @@ public class BookingController {
         model.addAttribute("booking", booking);
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("clients", clientRepository.findAll());
+        model.addAttribute("malfunctions", malfunctionRepository.findAll());
         return "booking/Edit";
     }
 
@@ -121,8 +131,10 @@ public class BookingController {
         if (bindingResultBooking.hasErrors()) {
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("clients", clientRepository.findAll());
+            model.addAttribute("malfunctions", malfunctionRepository.findAll());
             return "booking/Edit";
         }
+        booking.setMalfunctionList(bookingRepository.findById(booking.getIdBooking()).get().getMalfunctionList());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         booking.setEmployee(employeeRepository.findByUserUsername(authentication.getName()));
         bookingRepository.save(booking);

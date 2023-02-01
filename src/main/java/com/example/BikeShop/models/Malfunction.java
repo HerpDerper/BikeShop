@@ -12,7 +12,6 @@ public class Malfunction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idMalfunction;
 
-    @Pattern(regexp = "[а-яА-Я]{1,50}", message = "Наименование неисправности должно быть от 1 до 50 символов и состоять только из букв")
     private String name;
 
     @ManyToMany

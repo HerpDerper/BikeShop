@@ -16,7 +16,7 @@ public class DatabaseConfig {
 
     public static String host = "";
 
-    private static String applicationProperties = "src/main/resources/application.properties";
+    private static final String applicationProperties = "src/main/resources/application.properties";
 
     public static void init() {
         Pattern patternHost = Pattern.compile("\\{MYSQL_HOST:(.+)\\}", Pattern.MULTILINE);
