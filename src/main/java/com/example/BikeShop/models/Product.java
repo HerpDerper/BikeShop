@@ -14,7 +14,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idProduct;
 
-    @NotBlank(message = "Наименование товара не должено быть пустым или состоять из одних лишь пробелов")
+    @NotBlank(message = "Наименование товара не должно быть пустым или состоять из одних лишь пробелов")
     @Size(min = 1, max = 30, message = "Наименование товара должно быть от 1 до 30 символов")
     private String name;
 
@@ -23,7 +23,7 @@ public class Product {
     private int price;
 
     @NotNull(message = "Дата поступления не должна быть пустой")
-    @Past(message = "Дата поступления не может быть будущей")
+    @Past(message = "Дата поступления не должна быть будущей")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateReceipt;

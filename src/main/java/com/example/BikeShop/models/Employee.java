@@ -32,7 +32,7 @@ public class Employee {
     @Temporal(TemporalType.DATE)
     private Date dateBirth;
 
-    @Pattern(regexp = "[0-9]{4}", message = "Серия паспорта должен состоять только из цифр и иметь данный формат: 9999")
+    @Pattern(regexp = "[0-9]{4}", message = "Серия паспорта должна состоять только из цифр и иметь данный формат: 9999")
     private String passportSeries;
 
     @Pattern(regexp = "[0-9]{6}", message = "Номер паспорта должен состоять только из цифр и иметь данный формат: 999999")
@@ -41,7 +41,7 @@ public class Employee {
     @NotBlank(message = "Адрес не должен быть пустым или состоять из одних лишь пробелов")
     private String address;
 
-    @Pattern(regexp = "[+]7[(]\\d{3}[)]\\d{3}-\\d{2}-\\d{2}", message = "Номера телефона должен состоять из 11 цифр и иметь данный формат: +7(999)999-99-99")
+    @Pattern(regexp = "[+]7[(]\\d{3}[)]\\d{3}-\\d{2}-\\d{2}", message = "Номер телефона должен состоять из 11 цифр и иметь данный формат: +7(999)999-99-99")
     private String phoneNumber;
 
     @OneToOne

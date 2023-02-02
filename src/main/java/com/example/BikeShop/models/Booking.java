@@ -18,7 +18,7 @@ public class Booking {
     private Long idBooking;
 
     @NotNull(message = "Дата начала работ не должна быть пустой")
-    @PastOrPresent(message = "Дата начала работ не может быть будущей")
+    @PastOrPresent(message = "Дата начала работ не должна быть будущей")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dateBegin;

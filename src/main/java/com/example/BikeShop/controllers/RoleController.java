@@ -20,13 +20,13 @@ public class RoleController {
     @PostMapping("/main")
     public String getMainPage() {
         return switch (getRoleType(SecurityContextHolder.getContext().getAuthentication())) {
-            case ADMIN -> "redirect:/database/index";
-            case HR_DEP, DIRECTOR -> "redirect:/employee/index";
+            case ADMIN, DIRECTOR -> "redirect:/database/index";
+            case HR_DEP -> "redirect:/employee/index";
             case SALES_DEP -> "redirect:/report/index";
             case MERCHANDISER -> "redirect:/product/index";
             case REPAIR_DEP -> "redirect:/booking/index";
             case CLIENT_SERVICE_DEP -> "redirect:/client/index";
-            default -> "redirect:/database/index";
+            default -> "redirect:/???/index";
         };
     }
 

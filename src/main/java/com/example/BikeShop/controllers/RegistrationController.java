@@ -5,6 +5,8 @@ import com.example.BikeShop.models.Role;
 import com.example.BikeShop.models.User;
 import com.example.BikeShop.repositories.ClientRepository;
 import com.example.BikeShop.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,5 +63,38 @@ public class RegistrationController {
         client.setUser(user);
         clientRepository.save(client);
         return "redirect:/login";
+    }
+
+    @GetMapping("/edit")
+    public String edit(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("user", userRepository.findByUsername(authentication.getName()));
+        return "user/Edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
+                       @RequestParam(required = false) String password,
+                       @RequestParam(required = false) String passwordSubmit,
+                       Model model) {
+        if (userRepository.findByUsername(user.getUsername()) != null &&
+                !userRepository.findByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
+            bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
+            model.addAttribute("errorMessageUsername", "Данный логин уже занят");
+        }
+        if (!passwordSubmit.equals(password)) {
+            bindingResultUser.addError(new ObjectError("password", "Пароли не совпадают"));
+            model.addAttribute("errorMessagePasswordSubmit", "Пароли не совпадают");
+        }
+        if (!password.equals("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()â€\\\"[{}]:;'.,?/*~$^+=<>]).{8,255}$\"")) {
+            bindingResultUser.addError(new ObjectError("password", "Пароли не совпадают"));
+            model.addAttribute("errorMessagePassword", "Пароли не совпадают");
+        }
+        if (bindingResultUser.hasErrors())
+            return "user/Edit";
+        if (password.isBlank())
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "redirect:/main";
     }
 }

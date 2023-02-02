@@ -16,7 +16,7 @@ public class Category {
     private Long idCategory;
 
     @NotBlank(message = "Наименование категории товара не должено быть пустым или состоять из одних лишь пробелов")
-    @Size(min = 1, max = 30, message = "Наименование категории товара не должено быть от 1 до 30 символов")
+    @Size(min = 1, max = 30, message = "Наименование категории товара должно быть от 1 до 30 символов")
     private String name;
 
     public Category() {
