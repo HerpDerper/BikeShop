@@ -1,7 +1,6 @@
 package com.example.BikeShop.controllers;
 
 import com.example.BikeShop.models.Booking;
-import com.example.BikeShop.models.Malfunction;
 import com.example.BikeShop.models.Status;
 import com.example.BikeShop.repositories.*;
 import org.springframework.data.domain.Sort;
@@ -15,7 +14,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @PreAuthorize("hasAnyAuthority('REPAIR_DEP') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/booking")

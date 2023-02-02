@@ -133,9 +133,7 @@ public class EmployeeController {
             long milliseconds = new Date().getTime() - employee.getDateBirth().getTime();
             int ages = (int) (milliseconds / (24 * 60 * 60 * 1000 * 365.25));
             if (userRepository.findByUsername(user.getUsername()) != null &&
-                    !userRepository.findByUsername(user.getUsername())
-                            .getIdUser()
-                            .equals(user.getIdUser())) {
+                    !userRepository.findByUsername(user.getUsername()).getIdUser().equals(user.getIdUser())) {
                 bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
                 model.addAttribute("errorMessageUsername", "Данный логин уже занят");
             }
