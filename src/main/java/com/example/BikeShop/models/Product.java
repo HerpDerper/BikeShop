@@ -28,7 +28,7 @@ public class Product {
     @Temporal(TemporalType.DATE)
     private Date dateReceipt;
 
-    @Min(value = 1, message = "Количество товара должно быть больше или равно 1")
+    @Min(value = 0, message = "Количество товара должно быть больше или равно 0")
     @NotNull(message = "Количество товара не должно быть пустым")
     private int count;
 
@@ -60,7 +60,6 @@ public class Product {
 
     public Product() {
     }
-
 
     public Product(String name, int price, Date dateReceipt, int count, int warrantyPeriod, boolean active,
                    Image image, Category category, Color color, Storage storage, Supplier supplier) {

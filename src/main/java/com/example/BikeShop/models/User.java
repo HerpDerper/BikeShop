@@ -17,8 +17,8 @@ public class User {
     @NotBlank(message = "Логин не должен быть пустым или состоять из одних лишь пробелов")
     @Size(min = 1, max = 16, message = "Логин должен быть от 1 до 16 символов")
     private String username;
-    
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()â€\"[{}]:;'.,?/*~$^+=<>]).{8,255}$", message = "Пароль должен должно быть от 8 символов и состоять из латинских букв и цифр")
+
+   // @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()â€\"[{}]:;'.,?/*~$^+=<>]).{8,255}$", message = "Пароль должен должно быть от 8 символов и состоять из латинских букв и цифр")
     private String password;
 
     private boolean active;
@@ -31,9 +31,10 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, Set<Role> roles) {
+    public User(String username, String password, boolean active, Set<Role> roles) {
         this.username = username;
         this.password = password;
+        this.active = active;
         this.roles = roles;
     }
 

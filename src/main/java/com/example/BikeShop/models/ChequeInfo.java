@@ -17,7 +17,7 @@ public class ChequeInfo {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date dateBirth;
+    private Date datePrint;
 
     @OneToOne
     @JoinColumn(name = "clientId", referencedColumnName = "idClient")
@@ -26,8 +26,8 @@ public class ChequeInfo {
     public ChequeInfo() {
     }
 
-    public ChequeInfo(Date dateBirth, Client client) {
-        this.dateBirth = dateBirth;
+    public ChequeInfo(Date datePrint, Client client) {
+        this.datePrint = datePrint;
         this.client = client;
     }
 
@@ -39,12 +39,12 @@ public class ChequeInfo {
         this.idChequeInfo = idChequeInfo;
     }
 
-    public Date getDateBirth() {
-        return dateBirth;
+    public Date getDatePrint() {
+        return datePrint;
     }
 
-    public void setDateBirth(Date dateBirth) {
-        this.dateBirth = dateBirth;
+    public void setDatePrint(Date datePrint) {
+        this.datePrint = datePrint;
     }
 
     public Client getClient() {

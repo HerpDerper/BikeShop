@@ -12,9 +12,8 @@ public class Cheque {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCheque;
 
-    @Min(value = 0, message = "Количество товара должно быть больше или равно 0")
-    @NotNull(message = "Количество товара не должно быть пустым")
-    private int productCount;
+    @NotNull
+    private int count;
 
     @ManyToOne
     @JoinColumn(name = "productId", referencedColumnName = "idProduct")
@@ -27,8 +26,8 @@ public class Cheque {
     public Cheque() {
     }
 
-    public Cheque(int productCount, Product product, ChequeInfo chequeInfo) {
-        this.productCount = productCount;
+    public Cheque(int count, Product product, ChequeInfo chequeInfo) {
+        this.count = count;
         this.product = product;
         this.chequeInfo = chequeInfo;
     }
@@ -41,12 +40,12 @@ public class Cheque {
         this.idCheque = idCheque;
     }
 
-    public int getProductCount() {
-        return productCount;
+    public int getCount() {
+        return count;
     }
 
-    public void setProductCount(int productCount) {
-        this.productCount = productCount;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public Product getProduct() {

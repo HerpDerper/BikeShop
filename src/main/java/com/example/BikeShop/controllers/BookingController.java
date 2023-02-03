@@ -1,6 +1,7 @@
 package com.example.BikeShop.controllers;
 
 import com.example.BikeShop.models.Booking;
+import com.example.BikeShop.models.Malfunction;
 import com.example.BikeShop.models.Status;
 import com.example.BikeShop.repositories.*;
 import org.springframework.data.domain.Sort;
@@ -14,6 +15,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @PreAuthorize("hasAnyAuthority('REPAIR_DEP') or hasAnyAuthority('DIRECTOR')")
 @RequestMapping("/booking")
@@ -42,7 +44,6 @@ public class BookingController {
         this.employeeRepository = employeeRepository;
         this.malfunctionRepository = malfunctionRepository;
     }
-
 
     @GetMapping("index")
     public String bookingIndex(Model model) {
@@ -135,6 +136,14 @@ public class BookingController {
         booking.setMalfunctionList(bookingRepository.findById(booking.getIdBooking()).get().getMalfunctionList());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         booking.setEmployee(employeeRepository.findByUserUsername(authentication.getName()));
+        bookingRepository.save(booking);
+        return "redirect:/booking/index";
+    }
+
+    @PostMapping("edit/malfunction")
+    public String bookingMalfunctionEdit(@RequestParam Booking booking,
+                                  @RequestParam List<Malfunction> malfunctions) {
+        booking.setMalfunctionList(malfunctions);
         bookingRepository.save(booking);
         return "redirect:/booking/index";
     }

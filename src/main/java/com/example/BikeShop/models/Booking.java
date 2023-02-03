@@ -45,7 +45,7 @@ public class Booking {
 
     @ManyToMany
     @JoinTable(name = "BookingMalfunction", joinColumns = @JoinColumn(name = "bookingId"), inverseJoinColumns = @JoinColumn(name = "malfunctionId"))
-    public List<Malfunction> malfunctionList;
+    private List<Malfunction> malfunctionList;
 
     public Booking() {
     }

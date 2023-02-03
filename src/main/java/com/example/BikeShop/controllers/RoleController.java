@@ -26,7 +26,7 @@ public class RoleController {
             case MERCHANDISER -> "redirect:/product/index";
             case REPAIR_DEP -> "redirect:/booking/index";
             case CLIENT_SERVICE_DEP -> "redirect:/client/index";
-            default -> "redirect:/???/index";
+            default -> "redirect:/products";
         };
     }
 
