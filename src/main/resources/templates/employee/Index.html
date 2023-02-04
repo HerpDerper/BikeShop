@@ -24,8 +24,7 @@
                 </div>
             </div>
         </form>
-        <form th:action="@{/employee/sort}" th:method="get"
-              class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-6">
+        <form th:action="@{/employee/sort}" th:method="get" class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-6">
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col col-lg-3">
@@ -84,10 +83,8 @@
             </td>
             <td class="text-center">
                 <form th:action="@{/employee/changeStatus}" method="post">
-                    <input th:if="${employee.user.active}" value="Заблокировать" type="submit"
-                           class="btn btn-outline-danger">
-                    <input th:if="${!employee.user.active}" value="Разблокировать" type="submit"
-                           class="btn btn-outline-success">
+                    <input th:if="${employee.user.active}" value="Заблокировать" type="submit" class="btn btn-outline-danger">
+                    <input th:if="${!employee.user.active}" value="Разблокировать" type="submit" class="btn btn-outline-success">
                     <input type="hidden" th:value="${employee.idEmployee}" name="employee">
                 </form>
             </td>

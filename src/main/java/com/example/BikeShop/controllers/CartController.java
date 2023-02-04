@@ -33,13 +33,16 @@ public class CartController {
     public String cartIndex(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Iterable<Cart> carts = cartRepository.findByClientUserUsername(authentication.getName());
+        int cartCount = 0;
         for (Cart cart : carts) {
             if (cart.getCount() > cart.getProduct().getCount()) {
                 cart.setCount(cart.getProduct().getCount());
                 cartRepository.save(cart);
             }
+            cartCount++;
         }
         model.addAttribute("carts", carts);
+        model.addAttribute("cartsCount", cartCount);
         return "cart/Index";
     }
 
@@ -47,7 +50,13 @@ public class CartController {
     public String cartCreate(@RequestParam Product product) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Client client = clientRepository.findByUserUsername(authentication.getName());
-        Cart cart = new Cart(1, client, product);
+        Cart cart;
+        if (cartRepository.findByClientAndProduct(client, product) == null)
+            cart = new Cart(1, client, product);
+        else {
+            cart = cartRepository.findByClientAndProduct(client, product);
+            cart.setCount(cart.getCount() + 1);
+        }
         cartRepository.save(cart);
         return "redirect:/products";
     }

@@ -39,9 +39,8 @@ public class ClientPagesController {
 
     private final ResourceLoader resourceLoader;
 
-    public ClientPagesController(ClientRepository clientRepository, ProductRepository productRepository,
-                                 ChequeInfoRepository chequeInfoRepository, ChequeRepository chequeRepository,
-                                 CartRepository cartRepository, ResourceLoader resourceLoader) {
+    public ClientPagesController(ClientRepository clientRepository, ProductRepository productRepository, ChequeInfoRepository chequeInfoRepository,
+                                 ChequeRepository chequeRepository, CartRepository cartRepository, ResourceLoader resourceLoader) {
         this.clientRepository = clientRepository;
         this.productRepository = productRepository;
         this.chequeInfoRepository = chequeInfoRepository;
@@ -81,7 +80,11 @@ public class ClientPagesController {
     @GetMapping("history")
     public String history(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int chequesCount = 0;
+        for (Cheque cheque : chequeRepository.findAll())
+            chequesCount++;
         model.addAttribute("cheques", chequeRepository.findByChequeInfoClientUserUsername(authentication.getName()));
+        model.addAttribute("chequesCount", chequesCount);
         return "clientPages/History";
     }
 
@@ -114,8 +117,8 @@ public class ClientPagesController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Client client = clientRepository.findByUserUsername(authentication.getName());
         Iterable<Cart> carts = cartRepository.findByClientUserUsernameAndProductActive(authentication.getName(), true);
+        ChequeInfo chequeInfo = new ChequeInfo(new Date(), client);
         for (Cart cart : carts) {
-            ChequeInfo chequeInfo = new ChequeInfo(new Date(), client);
             Product productDB = cart.getProduct();
             chequeInfoRepository.save(chequeInfo);
             Cheque cheque = new Cheque(cart.getCount(), productDB, chequeInfo);

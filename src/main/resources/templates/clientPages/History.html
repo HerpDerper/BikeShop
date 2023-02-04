@@ -8,15 +8,14 @@
 </head>
 <body>
 <div th:insert="headers/ClientHeader"></div>
-<a class="btn btn-outline-primary" href="/generateExcel" style="margin-bottom:0.5em">Отчет о покупках в Excel</a>
-<a class="btn btn-outline-primary" href="/generateWord" style="margin-bottom:0.5em">Отчет о покупках в Word</a>
 <div class="container">
+    <a class="btn btn-outline-primary" th:if="${chequesCount>0}" href="/generateExcel" style="margin-bottom:0.5em">Чек в Excel</a>
+    <a class="btn btn-outline-primary" th:if="${chequesCount>0}" href="/generateWord" style="margin-bottom:0.5em">Чек в Word</a>
     <h1>История</h1>
     <div class="row">
         <div class="col-3 mb-3" th:each="cheque: ${cheques}">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top rounded" height="200px" width="200px" alt=""
-                     th:src="'/image/' + ${cheque.product.image.idImage}">
+                <img class="card-img-top rounded" height="200px" width="200px" alt="" th:if="${cheque.product.image!=null}" th:src="'/image/' + ${cheque.product.image.idImage}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${cheque.product.name}"></h5>
                     <p class="card-text" th:text="${cheque.product.category.name}"></p>

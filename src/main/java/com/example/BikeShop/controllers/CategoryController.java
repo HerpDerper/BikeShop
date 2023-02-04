@@ -63,8 +63,7 @@ public class CategoryController {
     }
 
     @PostMapping("create")
-    public String categoryCreate(@ModelAttribute("category") @Valid Category category, BindingResult bindingResultCategory,
-                                 Model model) {
+    public String categoryCreate(@ModelAttribute("category") @Valid Category category, BindingResult bindingResultCategory, Model model) {
         if (categoryRepository.findByName(category.getName()) != null) {
             bindingResultCategory.addError(new ObjectError("name", "Данная категория уже существует"));
             model.addAttribute("errorMessageName", "Данная категория уже существует");
@@ -76,8 +75,7 @@ public class CategoryController {
     }
 
     @PostMapping("edit")
-    public String categoryEdit(@ModelAttribute("category") @Valid Category category, BindingResult bindingResultCategory,
-                               Model model) {
+    public String categoryEdit(@ModelAttribute("category") @Valid Category category, BindingResult bindingResultCategory, Model model) {
         if (categoryRepository.findByName(category.getName()) != null &&
                 !categoryRepository.findByName(category.getName())
                         .getIdCategory()

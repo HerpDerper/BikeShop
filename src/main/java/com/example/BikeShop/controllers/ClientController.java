@@ -28,8 +28,7 @@ public class ClientController {
 
     private final PasswordEncoder passwordEncoder;
 
-    public ClientController(ClientRepository clientRepository, UserRepository userRepository,
-                            PasswordEncoder passwordEncoder) {
+    public ClientController(ClientRepository clientRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.clientRepository = clientRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -85,8 +84,7 @@ public class ClientController {
     @PostMapping("create")
     public String clientCreate(@ModelAttribute("user") @Valid User user, BindingResult bindingResultUser,
                                @ModelAttribute("client") @Valid Client client, BindingResult bindingResultClient,
-                               @RequestParam String passwordSubmit,
-                               Model model) {
+                               @RequestParam String passwordSubmit, Model model) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
             bindingResultUser.addError(new ObjectError("username", "Данный логин уже занят"));
             model.addAttribute("errorMessageUsername", "Данный логин уже занят");

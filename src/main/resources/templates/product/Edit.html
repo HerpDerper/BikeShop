@@ -11,8 +11,7 @@
 <div th:insert="headers/EmployeeHeader"></div>
 <div class="d-flex flex-column align-items-center justify-content-center mt-3">
     <h1 class="display-5 p-2">Редактирование товара</h1>
-    <form th:action="${'/product/edit'}" method="post" th:object="${product}" class="form col-sm-3"
-          enctype="multipart/form-data">
+    <form th:action="${'/product/edit'}" method="post" th:object="${product}" class="form col-sm-3" enctype="multipart/form-data">
         <input type="hidden" th:field="*{idProduct}">
         <input type="hidden" th:field="*{active}">
         <input type="hidden" th:field="*{image}">
@@ -33,15 +32,12 @@
             <div class="error text-danger" th:if="${#fields.hasErrors('count')}" th:errors="*{count}"></div>
         </div>
         <div class="input-group mt-2">
-            <input placeholder="Срок гарантии" type="text" class="form-control" th:field="*{warrantyPeriod}"
-                   data-mask="warrantyPeriod">
+            <input placeholder="Срок гарантии" type="text" class="form-control" th:field="*{warrantyPeriod}" data-mask="warrantyPeriod">
             <span class="input-group-text" id="basic-addon2">месяцев</span>
-            <div class="error text-danger" th:if="${#fields.hasErrors('warrantyPeriod')}"
-                 th:errors="*{warrantyPeriod}"></div>
+            <div class="error text-danger" th:if="${#fields.hasErrors('warrantyPeriod')}" th:errors="*{warrantyPeriod}"></div>
         </div>
         <div class="form-group mt-2">
-            <input placeholder="Изображение" type="file" class="form-control" name="file"
-                   accept="image/png, image/jpg, image/jpeg">
+            <input placeholder="Изображение" type="file" class="form-control" name="file" accept="image/png, image/jpg, image/jpeg">
         </div>
         <div class="input-group mt-2">
             <select th:field="*{category}" class="form-control">

@@ -34,9 +34,8 @@ public class ProductController {
 
     private final ProductImageService productImageService;
 
-    public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository,
-                             ColorRepository colorRepository, StorageRepository storageRepository,
-                             SupplierRepository supplierRepository, ImageRepository imageRepository,
+    public ProductController(ProductRepository productRepository, CategoryRepository categoryRepository, ColorRepository colorRepository,
+                             StorageRepository storageRepository, SupplierRepository supplierRepository, ImageRepository imageRepository,
                              ProductImageService productImageService) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
@@ -103,9 +102,8 @@ public class ProductController {
     }
 
     @PostMapping("create")
-    public String productCreate(@RequestParam("file") MultipartFile file,
-                                @ModelAttribute("product") @Valid Product product, BindingResult bindingResultProduct,
-                                Model model) throws IOException {
+    public String productCreate(@ModelAttribute("product") @Valid Product product, BindingResult bindingResultProduct,
+                                @RequestParam("file") MultipartFile file, Model model) throws IOException {
         if (file.isEmpty()) {
             bindingResultProduct.addError(new ObjectError("image", "Изображение товара не должно быть пустым"));
             model.addAttribute("errorMessageImage", "Изображение товара не должно быть пустым");
@@ -123,9 +121,8 @@ public class ProductController {
     }
 
     @PostMapping("edit")
-    public String productEdit(@RequestParam(required = false, name = "file") MultipartFile file,
-                              @ModelAttribute("product") @Valid Product product, BindingResult bindingResultProduct,
-                              Model model) throws IOException {
+    public String productEdit(@ModelAttribute("product") @Valid Product product, BindingResult bindingResultProduct,
+                              @RequestParam(required = false, name = "file") MultipartFile file, Model model) throws IOException {
         if (bindingResultProduct.hasErrors()) {
             model.addAttribute("categories", categoryRepository.findAll());
             model.addAttribute("colors", colorRepository.findAll());

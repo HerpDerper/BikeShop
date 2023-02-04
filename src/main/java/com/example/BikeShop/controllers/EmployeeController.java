@@ -32,8 +32,7 @@ public class EmployeeController {
 
     private final PasswordEncoder passwordEncoder;
 
-    public EmployeeController(EmployeeRepository employeeRepository, UserRepository userRepository,
-                              PasswordEncoder passwordEncoder) {
+    public EmployeeController(EmployeeRepository employeeRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -71,8 +70,7 @@ public class EmployeeController {
     }
 
     @GetMapping("create")
-    public String employeeCreate(@ModelAttribute("user") User user, @ModelAttribute("employee") Employee employee,
-                                 Model model) {
+    public String employeeCreate(@ModelAttribute("user") User user, @ModelAttribute("employee") Employee employee, Model model) {
         model.addAttribute("roles", getEmployeeRoles());
         return "employee/Create";
     }

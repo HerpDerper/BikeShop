@@ -63,8 +63,7 @@ public class SupplierController {
     }
 
     @PostMapping("create")
-    public String supplierCreate(@ModelAttribute("supplier") @Valid Supplier supplier, BindingResult bindingResultSupplier,
-                                 Model model) {
+    public String supplierCreate(@ModelAttribute("supplier") @Valid Supplier supplier, BindingResult bindingResultSupplier, Model model) {
         if (supplierRepository.findByPhoneNumber(supplier.getPhoneNumber()) != null) {
             bindingResultSupplier.addError(new ObjectError("phoneNumber", "Данный номер телефона уже занят"));
             model.addAttribute("errorMessagePhoneNumber", "Данный номер телефона уже занят");
@@ -76,8 +75,7 @@ public class SupplierController {
     }
 
     @PostMapping("edit")
-    public String supplierEdit(@ModelAttribute("supplier") @Valid Supplier supplier, BindingResult bindingResultSupplier,
-                               Model model) {
+    public String supplierEdit(@ModelAttribute("supplier") @Valid Supplier supplier, BindingResult bindingResultSupplier, Model model) {
         if (supplierRepository.findByPhoneNumber(supplier.getPhoneNumber()) != null &&
                 !supplierRepository.findByPhoneNumber(supplier.getPhoneNumber())
                         .getIdSupplier()

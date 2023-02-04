@@ -10,21 +10,18 @@
 <div th:insert="headers/EmployeeHeader"></div>
 <div class="container">
     <div class="d-flex container flex-row align-items-center justify-content-center mt-3 col-sm-8">
-        <form method="get" th:action="@{/database/downloadScript}"
-              class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-4">
+        <form method="get" th:action="@{/database/downloadScript}" class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-4">
             <div class="form-check">
                 <input class="form-check-input" name="withData" type="checkbox" value="1" id="flexCheck" checked>
                 <label class="form-check-label" for="flexCheck">Добавить данные</label>
             </div>
             <input type="submit" value="Скачать скрипт" class="btn btn-outline-primary margin-left">
         </form>
-        <form method="get" th:action="@{/database/createBackup}"
-              class="form-horizontal d-flex flex-column align-items-center justify-content-center col-sm-4">
+        <form method="get" th:action="@{/database/createBackup}" class="form-horizontal d-flex flex-column align-items-center justify-content-center col-sm-4">
             <input type="submit" value="Создать резервную копию" class="btn btn-outline-success">
         </form>
     </div>
-    <form method="post" th:action="@{/database/uploadBackup}" enctype="multipart/form-data"
-          class="row justify-content-md-center">
+    <form method="post" th:action="@{/database/uploadBackup}" enctype="multipart/form-data" class="row justify-content-md-center">
         <div class="col col-lg-4">
             <input type="file" name="file" class="form-control" accept=".sql">
         </div>

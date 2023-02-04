@@ -63,8 +63,7 @@ public class StorageController {
     }
 
     @PostMapping("create")
-    public String storageCreate(@ModelAttribute("storage") @Valid Storage storage, BindingResult bindingResultStorage,
-                                Model model) {
+    public String storageCreate(@ModelAttribute("storage") @Valid Storage storage, BindingResult bindingResultStorage, Model model) {
         if (storageRepository.findByAddress(storage.getAddress()) != null) {
             bindingResultStorage.addError(new ObjectError("address", "Данный склад уже существует"));
             model.addAttribute("errorMessageAddress", "Данный склад уже существует");
@@ -76,8 +75,7 @@ public class StorageController {
     }
 
     @PostMapping("edit")
-    public String storageEdit(@ModelAttribute("storage") @Valid Storage storage, BindingResult bindingResultStorage,
-                              Model model) {
+    public String storageEdit(@ModelAttribute("storage") @Valid Storage storage, BindingResult bindingResultStorage, Model model) {
         if (storageRepository.findByAddress(storage.getAddress()) != null &&
                 !storageRepository.findByAddress(storage.getAddress())
                         .getIdStorage()

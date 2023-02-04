@@ -5,17 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link media="all" rel="stylesheet" th:href="@{/bootstrap.css}">
     <link media="all" rel="stylesheet" th:href="@{/bootstrap.js}">
+    <script src="https://unpkg.com/imask"></script>
 </head>
 <body>
 <div th:insert="headers/ClientHeader"></div>
 <div class="container">
-    <a class="btn btn-outline-primary" th:action="@{/buyAll}" style="margin-bottom:0.5em">Купить все</a>
+    <a class="btn btn-outline-primary" th:if="${cartsCount>0}" th:action="@{/buyAll}" style="margin-bottom:0.5em">Купить все</a>
     <h1>Корзина</h1>
     <div class="row">
         <div class="col-3 mb-3" th:each="cart: ${carts}">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top rounded" height="200px" width="200px" alt=""
-                     th:src="'/image/' + ${cart.product.image.idImage}">
+                <img class="card-img-top rounded" height="200px" width="200px" alt="" th:if="${cart.product.image!=null}" th:src="'/image/' + ${cart.product.image.idImage}">
                 <div class="card-body">
                     <h5 class="card-title" th:text="${cart.product.name}"></h5>
                     <p class="card-text" th:text="${cart.product.category.name}"></p>
@@ -39,8 +39,8 @@
                 </div>
                 <div class="card-footer">
                     <form th:action="@{/cart/edit}" method="post">
-                        <input placeholder="Количество" type="number" class="form-control" th:value="${cart.count}"
-                               onsubmit="this.form.submit()" name="count">
+                        <input placeholder="Количество" type="number" class="form-control" data-mask="count" th:value="${cart.count}" onsubmit="this.form.submit()"
+                               name="count">
                         <input type="hidden" th:value="${cart.idCart}" name="cart">
                     </form>
                 </div>
@@ -49,4 +49,19 @@
     </div>
 </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mask = (dataValue, options) => {
+            const elements = document.querySelectorAll(`[data-mask="${dataValue}"]`)
+            if (!elements) return
+
+            elements.forEach(el => {
+                IMask(el, options)
+            })
+        }
+        mask('count', {
+            mask: '0'
+        })
+    })
+</script>
 </html>

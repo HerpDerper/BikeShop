@@ -11,8 +11,7 @@
 <div class="container">
     <a class="btn btn-outline-primary" href="/product/create" style="margin-bottom:0.5em">Добавить</a>
     <div class="d-flex justify-content-start">
-        <form th:action="@{/product/search}" th:method="get"
-              class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-5">
+        <form th:action="@{/product/search}" th:method="get" class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-5">
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col col-lg-6">
@@ -24,8 +23,7 @@
                 </div>
             </div>
         </form>
-        <form th:action="@{/product/sort}" th:method="get"
-              class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-6">
+        <form th:action="@{/product/sort}" th:method="get" class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-6">
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col col-lg-3">
@@ -84,10 +82,8 @@
             </td>
             <td class="text-center">
                 <form th:action="@{/product/changeStatus}" method="post">
-                    <input th:if="${product.active}" value="Удалить" type="submit"
-                           class="btn btn-outline-danger">
-                    <input th:if="${!product.active}" value="Восстановить" type="submit"
-                           class="btn btn-outline-success">
+                    <input th:if="${product.active}" value="Удалить" type="submit" class="btn btn-outline-danger">
+                    <input th:if="${!product.active}" value="Восстановить" type="submit" class="btn btn-outline-success">
                     <input type="hidden" th:value="${product.idProduct}" name="product">
                 </form>
             </td>

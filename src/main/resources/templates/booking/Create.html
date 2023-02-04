@@ -36,8 +36,7 @@
         <div class="form-group mt-2">
             <select th:field="*{client}" class="form-control">
                 <div th:each="client: ${clients}">
-                    <option th:value="${client.idClient}"
-                            th:text="${client.surname}+' '+${client.name.substring(0,1)}+'. '+${client.patronymic.substring(0,1)}+'.'"/>
+                    <option th:value="${client.idClient}" th:text="${client.surname}+' '+${client.name.substring(0,1)}+'. '+${client.patronymic.substring(0,1)}+'.'"/>
                 </div>
             </select>
         </div>

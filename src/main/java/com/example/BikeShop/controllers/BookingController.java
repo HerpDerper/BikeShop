@@ -34,9 +34,8 @@ public class BookingController {
 
     private final MalfunctionRepository malfunctionRepository;
 
-    public BookingController(BookingRepository bookingRepository, ProductRepository productRepository,
-                             StatusRepository statusRepository, ClientRepository clientRepository,
-                             EmployeeRepository employeeRepository, MalfunctionRepository malfunctionRepository) {
+    public BookingController(BookingRepository bookingRepository, ProductRepository productRepository, StatusRepository statusRepository,
+                             ClientRepository clientRepository, EmployeeRepository employeeRepository, MalfunctionRepository malfunctionRepository) {
         this.bookingRepository = bookingRepository;
         this.productRepository = productRepository;
         this.statusRepository = statusRepository;
@@ -102,8 +101,7 @@ public class BookingController {
     }
 
     @PostMapping("create")
-    public String bookingCreate(@ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResultBooking,
-                                Model model) {
+    public String bookingCreate(@ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResultBooking, Model model) {
         if (booking.getDateEnd() != null && booking.getDateBegin().after(booking.getDateEnd())) {
             bindingResultBooking.addError(new ObjectError("dateEnd", "Дата начала работ не должна быть позже даты завершения работ"));
             model.addAttribute("errorMessageDateEnd", "Дата начала работ не должна быть позже даты завершения работ");
@@ -121,8 +119,7 @@ public class BookingController {
     }
 
     @PostMapping("edit")
-    public String bookingEdit(@ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResultBooking,
-                              Model model) {
+    public String bookingEdit(@ModelAttribute("booking") @Valid Booking booking, BindingResult bindingResultBooking, Model model) {
         if (booking.getDateEnd() != null && booking.getDateBegin().after(booking.getDateEnd())) {
             bindingResultBooking.addError(new ObjectError("dateEnd", "Дата начала работ не должна быть позже даты завершения работ"));
             model.addAttribute("errorMessageDateEnd", "Дата начала работ не должна быть позже даты завершения работ");
@@ -141,8 +138,7 @@ public class BookingController {
     }
 
     @PostMapping("edit/malfunction")
-    public String bookingMalfunctionEdit(@RequestParam Booking booking,
-                                  @RequestParam List<Malfunction> malfunctions) {
+    public String bookingMalfunctionEdit(@RequestParam Booking booking, @RequestParam List<Malfunction> malfunctions) {
         booking.setMalfunctionList(malfunctions);
         bookingRepository.save(booking);
         return "redirect:/booking/index";
