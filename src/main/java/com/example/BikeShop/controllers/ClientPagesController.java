@@ -112,7 +112,7 @@ public class ClientPagesController {
         return "redirect:/history";
     }
 
-    @PostMapping("buyAll")
+    @GetMapping("buyAll")
     public String buyAll() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Client client = clientRepository.findByUserUsername(authentication.getName());

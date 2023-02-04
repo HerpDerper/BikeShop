@@ -12,7 +12,7 @@
     <h1 class="display-5 p-2">Информация о товаре</h1>
     <form class="form col-sm-3">
         <dd class="col-sm-10">
-            <img class="rounded img-fluid pt-4 align-center" th:src="'/image/' + ${product.image.idImage}" alt="">
+            <img class="rounded img-fluid pt-4 align-center" th:if="${product.image!=null}" th:src="'/image/' + ${product.image.idImage}" alt="">
         </dd>
         <div class="form-group mt-2">
             Наименование: <a th:text="${product.name}"/>
