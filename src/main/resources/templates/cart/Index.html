@@ -10,7 +10,9 @@
 <body>
 <div th:insert="headers/ClientHeader"></div>
 <div class="container">
-    <a class="btn btn-outline-primary" th:if="${cartsCount>0}" href="/buyAll" style="margin-bottom:0.5em">Купить все</a>
+    <form th:action="@{/buyAll}">
+        <input type="submit" class="btn btn-outline-primary" th:if="${cartsCount>0}" value="Купить все" style="margin-bottom:0.5em"/>
+    </form>
     <h1>Корзина</h1>
     <div class="row">
         <div class="col-3 mb-3" th:each="cart: ${carts}">
