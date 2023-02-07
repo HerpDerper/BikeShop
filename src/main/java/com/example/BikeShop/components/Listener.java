@@ -61,6 +61,5 @@ public class Listener {
         EmployeeSeeder.seed(employeeRepository, userRepository);
         BookingProductSeeder.seed(bookingRepository, productRepository, statusRepository, categoryRepository, colorRepository,
                 clientRepository, employeeRepository, storageRepository, supplierRepository);
-
     }
 }
