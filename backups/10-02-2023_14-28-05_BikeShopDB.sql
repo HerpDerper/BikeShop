@@ -112,6 +112,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (112,1,69,81),(113,1,69,85);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +166,7 @@ CREATE TABLE `cheque` (
 
 LOCK TABLES `cheque` WRITE;
 /*!40000 ALTER TABLE `cheque` DISABLE KEYS */;
-INSERT INTO `cheque` VALUES (93,2,92,81),(95,1,94,83),(97,1,96,81),(99,1,98,89),(103,1,102,81),(104,1,102,83);
+INSERT INTO `cheque` VALUES (93,2,92,81),(95,1,94,83),(97,1,96,81),(99,1,98,89),(103,1,102,81),(104,1,102,83),(108,1,107,81),(109,1,107,83),(111,1,110,81),(119,9,118,81),(122,2,121,83),(123,1,121,87);
 /*!40000 ALTER TABLE `cheque` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +193,7 @@ CREATE TABLE `cheque_info` (
 
 LOCK TABLES `cheque_info` WRITE;
 /*!40000 ALTER TABLE `cheque_info` DISABLE KEYS */;
-INSERT INTO `cheque_info` VALUES (92,'2013-02-04',69),(94,'2023-02-04',69),(96,'2022-02-04',70),(98,'2001-02-04',70),(102,'2023-02-04',69);
+INSERT INTO `cheque_info` VALUES (92,'2013-02-04',69),(94,'2023-02-04',69),(96,'2022-02-04',70),(98,'2001-02-04',70),(102,'2023-02-04',69),(107,'2023-02-04',69),(110,'2023-02-10',69),(118,'2023-02-10',115),(121,'2023-02-10',115);
 /*!40000 ALTER TABLE `cheque_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,7 +223,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (69,'Иванов','Иванович','+7(999)999-91-91','Иван',1),(70,'Петров','Петрович','+7(999)999-92-92','Петр',2),(71,'Антонов','Антонович','+7(999)999-93-93','Антон',3),(72,'Михайлов','Михайлович','+7(999)999-94-94','Михаил',4),(73,'Андреев','Андреевич','+7(999)999-95-95','Андрей',5);
+INSERT INTO `client` VALUES (69,'Иван','Иванович','+7(999)999-91-92','Иванов',1),(70,'Петров','Петрович','+7(999)999-92-92','Петр',2),(71,'Антонов','Антонович','+7(999)999-93-93','Антон',3),(72,'Михайлов','Михайлович','+7(999)999-94-94','Михаил',4),(73,'Андреев','Андреевич','+7(999)999-95-95','Андрей',5),(115,'Иван','Иванович','+7(800)555-35-35','Иванов',114);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,7 +303,7 @@ CREATE TABLE `hibernate_sequence` (
 
 LOCK TABLES `hibernate_sequence` WRITE;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (105);
+INSERT INTO `hibernate_sequence` VALUES (124);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +398,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (81,_binary '',96,'2023-02-04','Велосипед',9999,12,13,26,NULL,59,64),(83,_binary '',298,'2023-02-04','Рама',6499,1,14,18,NULL,60,65),(85,_binary '',200,'2023-02-04','Колеса',2999,3,15,27,NULL,61,66),(87,_binary '',50,'2023-02-04','Гудок',1999,6,16,26,NULL,62,67),(89,_binary '',2499,'2023-02-04','Спицы',1999,2,17,20,NULL,63,68);
+INSERT INTO `product` VALUES (81,_binary '',85,'2023-02-04','Велосипед',9999,12,13,26,NULL,59,64),(83,_binary '',295,'2023-02-04','Рама',6499,1,14,18,NULL,60,65),(85,_binary '',200,'2023-02-04','Колеса',2999,3,15,27,NULL,61,66),(87,_binary '',49,'2023-02-04','Гудок',1999,6,16,26,NULL,62,67),(89,_binary '',2499,'2023-02-04','Спицы',1999,2,17,20,NULL,63,68);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -496,7 +497,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,_binary '','$2a$10$tlmR1.uFhh7FT4OskfBpD.pbfMB/om1a2aSoFiqEvdQrTcloMnyty','CLIENT1'),(2,_binary '','$2a$10$tG.RzXjQIYhJshM2cIAN5OOL7mM0zwBfPsqAK/ObX9grw.8Jsi35e','CLIENT2'),(3,_binary '','$2a$10$HR4j32zTMqMm/0kThPkAu.03af97hMjMWTDRXuKcIEYVGvGgExazW','CLIENT3'),(4,_binary '','$2a$10$z4hPGj1DuHa0hhfEKE.WMOXJJGXsVd80yGwIdjK3lsoTvBRYdZjj6','CLIENT4'),(5,_binary '','$2a$10$Ac8OeUT9oMLCsA.38pmMpO8I3nbBCqLrG9Zw7ZLIbkuoicXfJq9rG','CLIENT5'),(6,_binary '','$2a$10$TNlEXBIsUQn/FXHTCwt6D.DVKQLBqMajXZPtyJZuvntyS6/NJ9e/m','ADMIN'),(7,_binary '','$2a$10$662i3FE83/8oUmhAiinJgeohP3kIezQsJ5MUoxye86gaiMrFOL3Ri','HR_DEP'),(8,_binary '','$2a$10$9WRwkZyRQ3fX3kEAPqc4KuJ1pC6qONpf3hblr8gSScIaiVgLKsIWi','SALES_DEP'),(9,_binary '','$2a$10$cKZT.A99lwpKqPY3u.78hOU654/o/Oq43rGwRndjSQWLQYNERGGby','DIRECTOR'),(10,_binary '','$2a$10$6lgDciS1jhbjeAjg1v7fouBjBR.8wy03BhO6BEQk0SBveE33Hj43a','MERCHANDISER'),(11,_binary '','$2a$10$wDTwRoVbNENtItbYn7XUCO1/CEgJUu0OBf9uRBdsiaA7Zpglx0Dqi','REPAIR_DEP'),(12,_binary '','$2a$10$oulAEFABOt9MdUXXsvnSnupeIopVTAJiIxMspBMvr7DWJx1o9ET2O','CLIENT_DEP');
+INSERT INTO `user` VALUES (1,_binary '','$2a$10$tlmR1.uFhh7FT4OskfBpD.pbfMB/om1a2aSoFiqEvdQrTcloMnyty','CLIENT1'),(2,_binary '','$2a$10$tG.RzXjQIYhJshM2cIAN5OOL7mM0zwBfPsqAK/ObX9grw.8Jsi35e','CLIENT2'),(3,_binary '','$2a$10$HR4j32zTMqMm/0kThPkAu.03af97hMjMWTDRXuKcIEYVGvGgExazW','CLIENT3'),(4,_binary '','$2a$10$z4hPGj1DuHa0hhfEKE.WMOXJJGXsVd80yGwIdjK3lsoTvBRYdZjj6','CLIENT4'),(5,_binary '','$2a$10$Ac8OeUT9oMLCsA.38pmMpO8I3nbBCqLrG9Zw7ZLIbkuoicXfJq9rG','CLIENT5'),(6,_binary '','$2a$10$TNlEXBIsUQn/FXHTCwt6D.DVKQLBqMajXZPtyJZuvntyS6/NJ9e/m','ADMIN'),(7,_binary '','$2a$10$662i3FE83/8oUmhAiinJgeohP3kIezQsJ5MUoxye86gaiMrFOL3Ri','HR_DEP'),(8,_binary '','$2a$10$9WRwkZyRQ3fX3kEAPqc4KuJ1pC6qONpf3hblr8gSScIaiVgLKsIWi','SALES_DEP'),(9,_binary '','$2a$10$cKZT.A99lwpKqPY3u.78hOU654/o/Oq43rGwRndjSQWLQYNERGGby','DIRECTOR'),(10,_binary '','$2a$10$6lgDciS1jhbjeAjg1v7fouBjBR.8wy03BhO6BEQk0SBveE33Hj43a','MERCHANDISER'),(11,_binary '','$2a$10$wDTwRoVbNENtItbYn7XUCO1/CEgJUu0OBf9uRBdsiaA7Zpglx0Dqi','REPAIR_DEP'),(12,_binary '','$2a$10$oulAEFABOt9MdUXXsvnSnupeIopVTAJiIxMspBMvr7DWJx1o9ET2O','CLIENT_DEP'),(114,_binary '','$2a$08$ip5MsgmR1clQPsf/tX6saezKRfNKBwQ9EmNfjBXCjYa5UhZB5Yq2C','Ivanov');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,7 +522,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,'CLIENT'),(2,'CLIENT'),(3,'CLIENT'),(4,'CLIENT'),(5,'CLIENT'),(6,'ADMIN'),(7,'HR_DEP'),(8,'SALES_DEP'),(9,'DIRECTOR'),(10,'MERCHANDISER'),(11,'REPAIR_DEP'),(12,'CLIENT_SERVICE_DEP');
+INSERT INTO `user_role` VALUES (1,'CLIENT'),(2,'CLIENT'),(3,'CLIENT'),(4,'CLIENT'),(5,'CLIENT'),(6,'ADMIN'),(7,'HR_DEP'),(8,'SALES_DEP'),(9,'DIRECTOR'),(10,'MERCHANDISER'),(11,'REPAIR_DEP'),(12,'CLIENT_SERVICE_DEP'),(114,'CLIENT');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -534,4 +535,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-04 13:35:06
+-- Dump completed on 2023-02-10 14:28:07
